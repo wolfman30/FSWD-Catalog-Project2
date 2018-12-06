@@ -22,6 +22,10 @@ def agingHallmarks():
     return render_template('agingHallmarks.html', 
                                 aging_hallmarks = aging_hallmarks)
 
+@app.route('/hallmark/new')
+def newHallmark():
+    return render_template('newHallmark.html')
+
 @app.route('/hallmark/<int:hallmark_id>/edit')
 def editHallmark(hallmark_id):
     editedHallmark = session.query(
