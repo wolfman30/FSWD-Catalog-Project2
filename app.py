@@ -22,11 +22,20 @@ def agingHallmarks():
     return render_template('agingHallmarks.html', 
                                 aging_hallmarks = aging_hallmarks)
 
-@app.route('/restaurant/<int:hallmark_id>/edit')
+@app.route('/hallmark/<int:hallmark_id>/edit')
 def editHallmark(hallmark_id):
     editedHallmark = session.query(
             AgingHallmark).filter_by(id=hallmark_id).one()
     return render_template('editHallmark.html', hallmark=editedHallmark)
+
+@app.route('/hallmark/<int:hallmark_id>/delete')
+def deleteHallmark(hallmark_id):
+    
+    markerToDelete = session.query(
+            AgingHallmark).filter_by(id=hallmark_id).one()
+    
+    return render_template('deleteHallmark.html', 
+                                hallmark = markerToDelete)
 
 if __name__ == '__main__':
     app.debug = True
