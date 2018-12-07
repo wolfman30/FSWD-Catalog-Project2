@@ -10,6 +10,7 @@ class AgingHallmark(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(300), nullable=False)
+    summary = Column(String(300))
 
 
 engine = create_engine('sqlite:///aginghallmarks.db', 

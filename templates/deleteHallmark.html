@@ -1,11 +1,14 @@
-<html><body>
+<html>
+<body>
 
-<h1>Delete Hallmark</h1>
+<h1>Do you want to delete "{{hallmark.name}}"?</h1>
 
-<p>Before you be a total gangsta and delete a hallmark of aging, 
-    make sure you know what you are doing!
-</p>
+<form action = "{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}" method = 'post'>
 
-<a href = "{{url_for('agingHallmarks')}}"> Cancel </a>
+<input type = 'submit' value = 'Hell yeah! Delete!'>
 
-</body></html>
+</form>
+
+<a href = "{{url_for('agingHallmarks')}}">Nah, go back!</a>
+</body>
+</html>

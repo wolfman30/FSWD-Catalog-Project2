@@ -15,37 +15,41 @@ DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
 @app.route('/')
-@app.route('/aging_hallmarks/')
+@app.route('/aging_hallmarks')
 def agingHallmarks():
     aging_hallmarks = session.query(AgingHallmark).all()
 
     return render_template('agingHallmarks.html', 
                                 aging_hallmarks = aging_hallmarks)
 
-@app.route('/hallmark/new', methods = ['GET', 'POST'])
+@app.route('/aging_hallmarks/new', methods = ['GET', 'POST'])
 def newHallmark():
     if request.method == 'POST':
-        newHallmark = AgingHallmark(name=request.form['name'])
-        session.add(newHallmark)
+        marker1 = AgingHallmark(name=request.form['name'])
+        marker2 = AgingHallmark(name=request.form['summary'])
+        session.add(marker1)
+        session.add(marker2)
         session.commit()
         return redirect(url_for('agingHallmarks'))
     else:
         return render_template('newHallmark.html')
 
-@app.route('/hallmark/<int:hallmark_id>/edit')
+@app.route('/aging_hallmarks/<int:hallmark_id>/edit')
 def editHallmark(hallmark_id):
     editedHallmark = session.query(
             AgingHallmark).filter_by(id=hallmark_id).one()
     return render_template('editHallmark.html', hallmark=editedHallmark)
 
-@app.route('/hallmark/<int:hallmark_id>/delete')
+@app.route('/aging_hallmarks/<int:hallmark_id>/delete', methods = ['GET', 'POST'])
 def deleteHallmark(hallmark_id):
-    
     markerToDelete = session.query(
-            AgingHallmark).filter_by(id=hallmark_id).one()
-    
-    return render_template('deleteHallmark.html', 
-                                hallmark = markerToDelete)
+                AgingHallmark).filter_by(id=hallmark_id).one()
+    if request.method == 'POST':
+        session.delete(markerToDelete)
+        session.commit()
+        return redirect(url_for('agingHallmarks'))
+    else:
+        return render_template('deleteHallmark.html', hallmark = markerToDelete)
 
 if __name__ == '__main__':
     app.debug = True

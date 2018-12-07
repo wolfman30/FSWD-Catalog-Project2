@@ -3,10 +3,15 @@
 <h1>Create a New Hallmark</h1>
 
 <form action = "{{ url_for('newHallmark')}}" method = 'post'>
-<p>Name:</p>
-    <input type = 'text' size = '50' name = 'name'>
+
+<dl>
+<dt>Name:</dt>
+    <dd><input type = 'text' size = '50' name = 'name' required>
+    </br></br>
+    <textarea name = 'summary' rows = '5' cols = '40' required></textarea></dd>
 
 <input type = 'submit' value = 'Create like a god!'>
+</dl>
 
 <a href = "{{url_for('agingHallmarks')}}"> Nah...go back!</a>
 

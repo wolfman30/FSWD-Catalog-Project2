@@ -7,63 +7,11 @@
 
 {% for hallmark in aging_hallmarks %}
 
+<p>
 <b>{{hallmark.name}}</b>
-{% if hallmark.name == "Genomic instability" %}
-<p>
-    Endogenous and exogenous threats to the DNA inside the nucleus
-    and mitochrondria
-</p>
-
-{% elif hallmark.name == "Telomere attrition" %}
-<p>
-    From normal cell divsion the gradual reduction of the compound nucleotide structures on the ends of chromosomes that 
-    prevent chromosomal deterioration or fusion with other chromosomes
-</p>
-
-{% elif hallmark.name == "Epigenetic alterations" %}
-<p>
-    Changes to the expression of the genes in the DNA, but not the sequence or structure 
-    of the DNA can harm the body and accelerate aging 
-</p>
-{% elif hallmark.name == "Loss of proteostasis"%}
-<p>
-    The demise of the mechanisms that maintain correct protein folding and break 
-    down of proteins, or impairment of protein homeostasis (proteostasis)
-</p>
-
-{% elif hallmark.name == "Deregulated nutrient sensing" %}
-<p>
-    A pathways of cascading chemical interactions for each unique fuel type 
-    in human cells is not entirely clean and incurs long-term cost in the body
-</p>
-
-{% elif hallmark.name == "Mitochondrial dysfunction" %}
-<p>
-    Mitcochondria are the 'powerhouses' of the cell that convert food 
-    to a useful form called adenosine triphosphate (ATP). There are several ways for these 
-    organelles to malfunction. 
-
-</p>
-
-{% elif hallmark.name == "Cellular senescence" %}
-<p>
-    Cellular senescence occurs when cells stop dividing as they should. 
-    But the evidence of their effect on the aging process is not well understood.
-</p>
-
-{% elif hallmark.name == "Stem cell exhaustion" %}
-<p>
-    The inability of stem cells to replenish tissues and organs with functional specialized cells
-    contributes to the malfunction of these tissues and organs. 
-</p>
-
-{% elif hallmark.name == "Altered intercellular communication" %}
-<p>
-    Signaling between cells, over time, will increase in self-preserving signals, 
-    which damages the surrounding tissues
-</p>
-{% endif %}
-
+</br></br>
+{{hallmark.summary}}
+</br>
 <a href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
     </br>
 <a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
