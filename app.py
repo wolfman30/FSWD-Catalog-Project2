@@ -25,10 +25,9 @@ def agingHallmarks():
 @app.route('/aging_hallmarks/new', methods = ['GET', 'POST'])
 def newHallmark():
     if request.method == 'POST':
-        marker1 = AgingHallmark(name=request.form['name'])
-        marker2 = AgingHallmark(name=request.form['summary'])
-        session.add(marker1)
-        session.add(marker2)
+        marker = AgingHallmark(name=request.form['name'], 
+                               summary=request.form['summary'])
+        session.add(marker)
         session.commit()
         return redirect(url_for('agingHallmarks'))
     else:

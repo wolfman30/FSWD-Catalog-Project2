@@ -7,16 +7,13 @@
 
 {% for hallmark in aging_hallmarks %}
 
-<p>
-<b>{{hallmark.name}}</b>
-</br></br>
-{{hallmark.summary}}
-</br>
-<a href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
-    </br>
-<a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
-</p>
+<p><b>{{hallmark.name}}</b></p>
 
+<p>{{hallmark.summary}}</p>
+
+<a href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
+</br>
+<a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
 
 {% endfor %}
 
