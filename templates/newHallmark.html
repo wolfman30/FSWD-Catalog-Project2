@@ -2,9 +2,13 @@
 
 <h1>Create a New Hallmark</h1>
 
-<p>Don't create an asinine one!</p>
+<form action = "{{ url_for('newHallmark')}}" method = 'post'>
+<p>Name:</p>
+    <input type = 'text' size = '50' name = 'name'>
+
+<input type = 'submit' value = 'Create like a god!'>
 
 <a href = "{{url_for('agingHallmarks')}}"> Nah...go back!</a>
 
-
+</form>
 </body></html>
