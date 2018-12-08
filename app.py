@@ -58,6 +58,7 @@ def deleteHallmark(hallmark_id):
         return redirect(url_for('agingHallmarks'))
     else:
         return render_template('deleteHallmark.html', hallmark = markerToDelete)
+        
 
 if __name__ == '__main__':
     app.debug = True
