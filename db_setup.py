@@ -21,6 +21,7 @@ class HallmarkDetails(Base):
     name = Column(String(100), nullable=False)
     description = Column(String(500))
     treatment = Column(String(300))
+    references = Column(String(250))
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
     aging_hallmark = relationship(AgingHallmark)
 
