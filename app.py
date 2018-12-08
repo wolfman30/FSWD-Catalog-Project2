@@ -58,7 +58,14 @@ def deleteHallmark(hallmark_id):
         return redirect(url_for('agingHallmarks'))
     else:
         return render_template('deleteHallmark.html', hallmark = markerToDelete)
-        
+
+@app.route('/aging_hallmarks/<int:hallmark_id>/')
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details')
+def hallmarkDetails(hallmark_id):
+    hallmark = session.query(AgingHallmark).filter_by(id=hallmark_id).one()
+    details = session.query(HallmarkDetails).filter_by(
+                    hallmark_id = hallmark_id).all()
+    return render_template('details.html', details=details, hallmark = hallmark)
 
 if __name__ == '__main__':
     app.debug = True

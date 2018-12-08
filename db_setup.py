@@ -24,7 +24,6 @@ class HallmarkDetails(Base):
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
     aging_hallmark = relationship(AgingHallmark)
 
-
 engine = create_engine('sqlite:///aginghallmarks.db', 
             connect_args = {'check_same_thread': False})
             #connect_args: courtesy of John S from:
