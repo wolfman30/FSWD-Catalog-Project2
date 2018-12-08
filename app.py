@@ -33,11 +33,20 @@ def newHallmark():
     else:
         return render_template('newHallmark.html')
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/edit')
+@app.route('/aging_hallmarks/<int:hallmark_id>/edit', methods = ['GET', 'POST'])
 def editHallmark(hallmark_id):
     editedHallmark = session.query(
             AgingHallmark).filter_by(id=hallmark_id).one()
-    return render_template('editHallmark.html', hallmark=editedHallmark)
+    if request.method == 'POST':
+        if request.form['name']:
+            editedHallmark.name = request.form['name']
+        elif request.form['summary']:
+            editedHallmark.summary = request.form['summary']
+        session.add(editedHallmark)
+        session.commit()
+        return redirect(url_for('agingHallmarks'))
+    else:
+        return render_template('editHallmark.html', hallmark=editedHallmark)
 
 @app.route('/aging_hallmarks/<int:hallmark_id>/delete', methods = ['GET', 'POST'])
 def deleteHallmark(hallmark_id):
