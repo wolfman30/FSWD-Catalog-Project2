@@ -65,7 +65,7 @@ def hallmarkDetails(hallmark_id):
     hallmark = session.query(AgingHallmark).filter_by(id=hallmark_id).one()
     details = session.query(HallmarkDetails).filter_by(
                     hallmark_id = hallmark_id).all()
-    return render_template('details.html', details=details, hallmark = hallmark)
+    return render_template('details.html', details=details, hallmark=hallmark)
 
 if __name__ == '__main__':
     app.debug = True

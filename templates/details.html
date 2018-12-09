@@ -1,12 +1,29 @@
 <html><body>
 <h1>{{hallmark.name}}</h1>
 
-
+{% if details != [] %}
 <h2>Description</h2>
 
-<h2>Treatment</h2>
+{% for detail in details %}
 
-<h2>References</h2>
+{% if detail.name == 'Endogenous threats'%}
+<p>{{detail.name}}</p>
+<p>{{detail.description}}</p>
+<p>{{detail.treatment}}</p>
+{%endif%}
+
+{% if detail.name == 'Exogenous threats' %}
+<p>{{detail.name}}</p>
+<p>{{detail.description}}</p>
+<p>{{detail.treatment}}</p>
+{%endif%}
+
+{%endfor%}
+
+{%else%}
+<p>You currently have no details</p>
+
+{%endif%}
 
 </body>
 </html>
