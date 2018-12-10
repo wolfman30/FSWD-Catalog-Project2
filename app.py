@@ -67,6 +67,26 @@ def hallmarkDetails(hallmark_id):
                     hallmark_id = hallmark_id).all()
     return render_template('details.html', details=details, hallmark=hallmark)
 
+@app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/edit',
+            methods = ['GET', 'POST'])
+def editDetail(hallmark_id, detail_id):
+    editedDetail = session.query(HallmarkDetails).filter_by(id=detail_id).one()
+    if request.method == 'POST':
+        if request.form['name']: 
+            editedDetail = request.form['name']
+        if request.form['description']:
+            editedDetail.description = request.form['description']
+        if request.form['treatment']:
+            editedDetail.treatment = request.form['treatment']
+        if request.form['references']: 
+            editedDetail.references = request.form['references']
+        session.add(editedDetail)
+        session.commit()
+        return redirect(url_for('hallmarkDetails', hallmark_id=hallmark_id))
+    else:
+        return render_template('editDetail.html', hallmark_id=hallmark_id, 
+                                detail_id=detail_id, detail=editedDetail)
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000)

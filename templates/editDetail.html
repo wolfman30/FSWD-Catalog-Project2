@@ -1,0 +1,22 @@
+<html><body>
+
+<form action = "{{url_for('editDetail', hallmark_id = hallmark_id, detail_id = detail.id)}}" method = 'post'>
+
+<h1>Edit Detail</h1>
+<p>Name</p>
+    <input type = 'text' size='50' name='name' placeholder='{{detail.name}}'>
+<p>Description</p>
+    <input type = 'text' size='200' name='description' placeholder='{{detail.description}}'>
+<p>Treatment</p>
+    <input type = 'text' size='50' name='treatment' placeholder='{{detail.treatment}}'>
+<p>References</p>
+    <input type = 'text' size='250' name='references' placeholder='{{detail.references}}'>
+
+
+<input type='submit' value='Submit Changes'>
+
+</form>
+<a href="{{url_for('hallmarkDetails', hallmark_id=hallmark_id)}}">Cancel</a>
+
+
+</body></html>
