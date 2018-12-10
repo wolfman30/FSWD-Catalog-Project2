@@ -87,6 +87,18 @@ def editDetail(hallmark_id, detail_id):
         return render_template('editDetail.html', hallmark_id=hallmark_id, 
                                 detail_id=detail_id, detail=editedDetail)
 
+@app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/delete', 
+            methods = ['GET', 'POST'])
+def deleteDetail(hallmark_id, detail_id):
+    detailToDetail = session.query(HallmarkDetails).filter_by(id=detail_id).one()
+    if request.method == 'POST':
+        session.delete(detailToDetail)
+        session.commit()
+        return redirect(url_for('hallmarkDetails', hallmark_id=hallmark_id))
+    else:
+        return render_template('deleteDetail.html', hallmark_id=hallmark_id, 
+                                detail_id=detail_id, detail=detailToDetail)
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
