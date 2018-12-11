@@ -188,10 +188,15 @@ stem_cell_exhaustion = AgingHallmark(name="Stem cell exhaustion",
 session.add(stem_cell_exhaustion)
 session.commit()
 
+detail0 = HallmarkDetails(name = 'Two Types of DNA', 
+                          description = '(A) Nuclear DNA (B) Mitochondrial DNA')
+session.add(detail0)
+session.commit()
+
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
+                          treatment = 'Artificial reinforcement of DNA repair mechanisms', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = stem_cell_exhaustion)
 session.add(detail1)
