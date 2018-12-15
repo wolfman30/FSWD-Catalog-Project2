@@ -12,6 +12,7 @@ class AgingHallmark(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(300), nullable=False)
     summary = Column(String(300))
+    treatment = Column(String(300))
 
 class HallmarkDetails(Base):
     
@@ -20,7 +21,6 @@ class HallmarkDetails(Base):
     id = Column(Integer, primary_key = True)
     name = Column(String(100), nullable=False)
     description = Column(String(500))
-    treatment = Column(String(300))
     references = Column(String(250))
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
     aging_hallmark = relationship(AgingHallmark)

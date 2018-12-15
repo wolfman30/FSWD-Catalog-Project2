@@ -13,14 +13,15 @@ session = DBSession()
 
 genomic_instability = AgingHallmark(name="Genomic instability",
                                     summary = '''Endogenous and exogenous threats to the DNA 
-                                                inside the nucleus and mitochrondria''')
+                                                inside the nucleus and mitochrondria''', 
+                                    treatment = '''Elimination of cells with the damanged DNA 
+                                                and/or artificial reinforcement of DNA repair mechanisms''')
 session.add(genomic_instability)
 session.commit()
 
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark=genomic_instability)
 session.add(detail1)
@@ -28,7 +29,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = genomic_instability)
 session.add(detail2)
@@ -44,10 +44,10 @@ telomere_attrition = AgingHallmark(name="Telomere attrition",
 session.add(telomere_attrition)
 session.commit()
 
-detail1 = HallmarkDetails(name = 'Endogenous threats', 
-                          description = '''Reactive Oxygen Species(ROS), 
-                                        DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
+detail1 = HallmarkDetails(name = 'Shelterin', 
+                          description = '''multiprotein complex that binds telomeres together and protects telomeres
+                                        from DNA repair mechanisms''', 
+                          treatment = 'Systemic viral transduction', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark=telomere_attrition)
 session.add(detail1)
@@ -160,7 +160,8 @@ session.commit()
 cellular_senescence = AgingHallmark(name="Cellular senescence", 
                                     summary = '''Cellular senescence occurs when cells stop 
                                                 dividing as they should. But the evidence of 
-                                                their effect on the aging process is not well understood.''')
+                                                their effect on the aging process is not well understood.''', 
+                                    treatment = 'senolytics')
 session.add(cellular_senescence)
 session.commit()
 
@@ -196,7 +197,7 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'Artificial reinforcement of DNA repair mechanisms', 
+                          treatment = 'NONE FOR NOW', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = stem_cell_exhaustion)
 session.add(detail1)
