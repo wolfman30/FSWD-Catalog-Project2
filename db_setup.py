@@ -25,6 +25,14 @@ class HallmarkDetails(Base):
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
     aging_hallmark = relationship(AgingHallmark)
 
+class GlossaryofTerms(Base):
+
+    __tablename__ = 'glossary'
+
+    id = Column(Integer, primary_key = True)
+    name = Column(String(100), nullable = False)
+    definition = Column(String(500))
+
 engine = create_engine('sqlite:///aginghallmarks.db', 
             connect_args = {'check_same_thread': False})
             #connect_args: courtesy of John S from:

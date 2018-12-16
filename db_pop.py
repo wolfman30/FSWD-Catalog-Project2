@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db_setup import Base, AgingHallmark, HallmarkDetails
+from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms
 
 engine = create_engine('sqlite:///aginghallmarks.db', 
             connect_args = {'check_same_thread': False})
@@ -11,10 +11,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
+
 genomic_instability = AgingHallmark(name="Genomic instability",
                                     summary = '''Endogenous and exogenous threats to the DNA 
                                                 inside the nucleus and mitochrondria''', 
-                                    treatment = '''Elimination of cells with the damanged DNA 
+                                    treatment = '''Elimination of cells with the damanged DNA via apoptosis 
                                                 and/or artificial reinforcement of DNA repair mechanisms''')
 session.add(genomic_instability)
 session.commit()
@@ -40,14 +41,14 @@ telomere_attrition = AgingHallmark(name="Telomere attrition",
                                                 reduction of the compound nucleotide 
                                                 structures on the ends of chromosomes that 
                                                 prevent chromosomal deterioration or fusion 
-                                                with other chromosomes''')
+                                                with other chromosomes''', 
+                                   treatment = 'Systemic viral transduction')
 session.add(telomere_attrition)
 session.commit()
 
 detail1 = HallmarkDetails(name = 'Shelterin', 
                           description = '''multiprotein complex that binds telomeres together and protects telomeres
-                                        from DNA repair mechanisms''', 
-                          treatment = 'Systemic viral transduction', 
+                                        from DNA repair mechanisms''',  
                           references = 'Bitchin ass sources!', 
                           aging_hallmark=telomere_attrition)
 session.add(detail1)
@@ -55,7 +56,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = telomere_attrition)
 session.add(detail2)
@@ -71,7 +71,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark=epigenetic_alterations)
 session.add(detail1)
@@ -79,7 +78,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = epigenetic_alterations)
 session.add(detail2)
@@ -95,7 +93,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!',
                           aging_hallmark = proteostasis_loss)
 session.add(detail1)
@@ -103,7 +100,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!',
                           aging_hallmark = proteostasis_loss)
 session.add(detail2)
@@ -119,7 +115,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = dereg_nutri_sensing)
 session.add(detail1)
@@ -127,7 +122,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = dereg_nutri_sensing)
 session.add(detail2)
@@ -143,7 +137,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = mitochondrial_dysfunction)
 session.add(detail1)
@@ -151,7 +144,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = mitochondrial_dysfunction)
 session.add(detail2)
@@ -168,7 +160,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = cellular_senescence)
 session.add(detail1)
@@ -176,7 +167,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = cellular_senescence)
 session.add(detail2)
@@ -197,7 +187,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'NONE FOR NOW', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = stem_cell_exhaustion)
 session.add(detail1)
@@ -205,7 +194,6 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = stem_cell_exhaustion)
 session.add(detail2)
@@ -221,7 +209,6 @@ session.commit()
 detail1 = HallmarkDetails(name = 'Endogenous threats', 
                           description = '''Reactive Oxygen Species(ROS), 
                                         DNA replication errors, spontaneous reactions''', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = altered_ic_comm)
 session.add(detail1)
@@ -229,10 +216,29 @@ session.commit()
 
 detail2 = HallmarkDetails(name = 'Exogenous threats', 
                           description = 'Chemicals, Radiation: Ultraviolet & Infrared', 
-                          treatment = 'None', 
                           references = 'Bitchin ass sources!', 
                           aging_hallmark = altered_ic_comm)
 session.add(detail2)
+session.commit()
+
+genome = GlossaryofTerms(name='genome', 
+                        definition = ''' the entire genetic material of the organism: the entire sequence of genes composing
+                                        the DNA both inside the nucleus of every cell and 
+                                        in the mitochondria. Genomic instability refers to the 
+                                        damage to and alterations of this genetic material.''')
+session.add(genome)
+session.commit()
+
+exogenous_threats = GlossaryofTerms(name='exogenous threats', 
+                                    definition = '''threats arising from outside or external to the genome.
+                                                    The sun's ultraviolat rays (UV) and infrared radiation (IR).''')
+session.add(exogenous_threats)
+session.commit()
+
+endogenous_threats = GlossaryofTerms(name = 'endogenous threats', 
+                                     definition = '''threats to the genome that arise inside the nuclei 
+                                                     or mitochondria''')
+session.add(endogenous_threats)
 session.commit()
 
 print("Added aging hallmarks!")

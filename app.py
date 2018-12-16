@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db_setup import Base, AgingHallmark, HallmarkDetails
+from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms
 
 app =  Flask(__name__)
 
@@ -21,6 +21,12 @@ def agingHallmarks():
 
     return render_template('agingHallmarks.html', 
                                 aging_hallmarks = aging_hallmarks)
+
+@app.route('/aging_hallmarks/glossary')
+def glossary():
+    glossary = session.query(GlossaryofTerms).all()
+
+    return render_template('glossary.html', glossary = glossary)
 
 @app.route('/aging_hallmarks/new', methods = ['GET', 'POST'])
 def newHallmark():

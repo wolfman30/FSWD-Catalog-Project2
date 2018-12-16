@@ -9,7 +9,7 @@
 {% if detail.name == 'Endogenous threats'%}
 <p>{{detail.name}}</p>
 <p>{{detail.description}}</p>
-<p>{{detail.treatment}}</p>
+
 
 <a href = "{{url_for('editDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Edit</a></br>
 <a href = "{{url_for('deleteDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Delete</a>
@@ -18,7 +18,7 @@
 {% if detail.name == 'Exogenous threats' %}
 <p>{{detail.name}}</p>
 <p>{{detail.description}}</p>
-<p>{{detail.treatment}}</p>
+
 
 <a href = "{{url_for('editDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Edit</a></br>
 <a href = "{{url_for('deleteDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Delete</a>
