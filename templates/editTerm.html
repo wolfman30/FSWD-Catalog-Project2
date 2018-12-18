@@ -1,0 +1,22 @@
+<html><body> 
+
+<h1>Edit Term</h1>
+
+<form action = "{{url_for('editTerm', term_id = glossary.id)}}" method = 'post'>
+
+<h4>Edit the name</h4>
+    <input type = 'text' size = '50' name = 'name' 
+                placeholder = '{{glossary.name}}'>
+
+<h4>Edit definition:</h4>
+    <textarea type='text' rows='5' cols='50' name='definition' placeholder = '{{glossary.definition}}'></textarea>
+
+<p><input type = 'submit' value = 'Submit changes'></p>
+
+</form>
+
+<a href = "{{url_for('glossary')}}"> Cancel </a>
+
+
+
+</body></html>

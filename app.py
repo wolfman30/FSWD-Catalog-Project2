@@ -117,6 +117,22 @@ def newTerm():
     else:
         return render_template('newTerm.html')
 
+@app.route('/aging_hallmarks/glossary/edit', methods = ['GET', 'POST'])
+def editTerm(term_id):
+    term_to_edit = session.query(
+        GlossaryofTerms).filter_by(id=term_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            term_to_edit.name = request.form['name']
+        elif request.form['definition']:
+            term_to_edit.definition = request.form['definition']
+        session.add(term_to_edit)
+        session.commit()
+        return redirect(url_for('glossary'))
+    else:
+        return render_template('editTerm.html', term = term_to_edit)
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000)

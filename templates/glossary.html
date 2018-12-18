@@ -3,10 +3,14 @@
 
 <h1>Glossary</h1>
 <h3><a href = "{{url_for('newTerm')}}">Create new term</a></h3>
+
 {% for term in glossary %}
 <h3>{{term.name}}</h3>
     <p>
     {{term.definition}}
+    </p>
+    <p>
+    <a href = "{{url_for('editTerm', term_id = term.id)}}">Edit</a>
     </p>
 
 {% endfor %}
