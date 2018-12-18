@@ -221,8 +221,15 @@ detail2 = HallmarkDetails(name = 'Exogenous threats',
 session.add(detail2)
 session.commit()
 
+dna = GlossaryofTerms(name='deoxyribonucleic acid (DNA)', 
+                      definition = '''double-stranded helix-shaped molecule in the nucleus and mitochondria of every human cell
+                                     commonly known as the "blueprint" of life since it contains the instructions for building all proteins
+                                    and enzymes used to produce all bodily structures and functions''')
+session.add(dna)
+session.commit()
+
 genome = GlossaryofTerms(name='genome', 
-                        definition = ''' the entire genetic material of the organism: the entire sequence of genes composing
+                        definition = '''the entire genetic material of the organism: the entire sequence of genes composing
                                         the DNA both inside the nucleus of every cell and 
                                         in the mitochondria. Genomic instability refers to the 
                                         damage to and alterations of this genetic material.''')

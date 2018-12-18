@@ -22,11 +22,6 @@ def agingHallmarks():
     return render_template('agingHallmarks.html', 
                                 aging_hallmarks = aging_hallmarks)
 
-@app.route('/aging_hallmarks/glossary')
-def glossary():
-    glossary = session.query(GlossaryofTerms).all()
-
-    return render_template('glossary.html', glossary = glossary)
 
 @app.route('/aging_hallmarks/new', methods = ['GET', 'POST'])
 def newHallmark():
@@ -104,6 +99,23 @@ def deleteDetail(hallmark_id, detail_id):
     else:
         return render_template('deleteDetail.html', hallmark_id=hallmark_id, 
                                 detail_id=detail_id, detail=detailToDetail)
+
+@app.route('/aging_hallmarks/glossary')
+def glossary():
+    glossary = session.query(GlossaryofTerms).all()
+
+    return render_template('glossary.html', glossary = glossary)
+
+@app.route('/aging_hallmarks/glossary/newTerm', methods = ['GET', 'POST'])
+def newTerm():
+    if request.method == 'POST':
+        newTerm = GlossaryofTerms(name=request.form['name'],
+                                  definition = request.form['definition'])
+        session.add(newTerm)
+        session.commit()
+        return redirect(url_for('glossary'))
+    else:
+        return render_template('newTerm.html')
 
 if __name__ == '__main__':
     app.debug = True
