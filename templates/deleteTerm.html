@@ -2,11 +2,11 @@
 
 <h1>Do you really want to delete {{term.name}}?</h1>
 
-<form action = "{{url_for('deleteTerm', term_id = term.id)}}">
+<form action = "{{url_for('deleteTerm', term_id = term.id)}}" method = 'post'>
 
-<input type = 'submit' value = 'Yes, delete'>
-</br>
-<a href = "{{url_for('glossary')}}">No, Cancel</a>
+<input type = 'submit' value = 'Delete'>
+
+<p><a href = "{{url_for('glossary')}}">Cancel</a></p>
 
 </form>
 

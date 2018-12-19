@@ -91,14 +91,14 @@ def editDetail(hallmark_id, detail_id):
 @app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/delete', 
             methods = ['GET', 'POST'])
 def deleteDetail(hallmark_id, detail_id):
-    detailToDetail = session.query(HallmarkDetails).filter_by(id=detail_id).one()
+    detail_to_del = session.query(HallmarkDetails).filter_by(id=detail_id).one()
     if request.method == 'POST':
-        session.delete(detailToDetail)
+        session.delete(detail_to_del)
         session.commit()
         return redirect(url_for('hallmarkDetails', hallmark_id=hallmark_id))
     else:
         return render_template('deleteDetail.html', hallmark_id=hallmark_id, 
-                                detail_id=detail_id, detail=detailToDetail)
+                                detail_id=detail_id, detail=detail_to_del)
 
 @app.route('/aging_hallmarks/glossary')
 def glossary():
@@ -124,11 +124,9 @@ def deleteTerm(term_id):
     if request.method == 'POST':
         session.delete(term_to_del)
         session.commit()
-        return redirect(url_for('glossary', term_id = term_id))
+        return redirect(url_for('glossary'))
     else:
-        return render_template('deleteTerm.html', term = term_to_del, 
-                                                  glossary = glossary, 
-                                                  term_id = term_id)
+        return render_template('deleteTerm.html', term = term_to_del, glossary = glossary, term_id = term_id)
 
 
 @app.route('/aging_hallmarks/glossary/<int:term_id>/edit', methods = ['GET', 'POST'])
