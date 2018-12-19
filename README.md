@@ -17,26 +17,36 @@ Step 3: Clone fullstack-udacity-vm by running the following command in your Git 
 
 Step 4: Cd into 'fullstack', then cd into 'vagrant'
 
-Step 5: Run:
+Step 5: Ensure Hyper-V is disabled so VirtualBox can do its job with Vagrant: 
+    
+    (a) Type 'powershell' in Windows Search --> right click powershell ---> run as administrator --> copy and paste 'Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All' (without the quotes) --> Press Enter --> Restart computer
+
+Step 6: In the 'fullstack-nanodegree-vm/vagrant' folder run the following:
 
     vagrant up
 
-Step 6: After every loads successfully (may take a hot minute), run:
+Step 7: After every loads successfully (may take a hot minute), run:
 
     vagrant ssh
 
-Step 7: After this operation completes, cd into '/vagrant'
+Step 8: After this operation completes, cd into '/vagrant'
 
-Step 8: Run 'ls' to see the folders. You should see 'catalog' as one. Cd into 'catalog'
+Step 9: Install pip
 
-Step 9: Clone my repo inside 'catalog':
+Step 10: Install flask
+
+Step 11: Install sqlalchemy
+
+Step 12: Run 'ls' to see the folders. You should see 'catalog' as one. Cd into 'catalog'
+
+Step 13: Clone my repo inside 'catalog':
 
     git clone https://github.com/wolfman30/FSWD-Catalog-Project2.git
 
-Step 10: Run:
+Step 14: Run:
 
     python app.py
 
-Step 11:
+Step 15:
 
 Open a web browser. Type in 'http://localhost8000/'. If you use Chrome you can omit 'http://'
