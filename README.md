@@ -4,7 +4,7 @@ Step 1:
 
 Download & install [Git](https://git-scm.com/downloads). You need this to install Vagrant and VirtualBox
 
-Step 2:
+Step 2: in the Git Bash terminal do the following: 
 
 (a) Download & install [Vagrant](https://www.vagrantup.com/downloads.html)
 (b) Download & install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
