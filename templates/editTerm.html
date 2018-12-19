@@ -2,14 +2,14 @@
 
 <h1>Edit Term</h1>
 
-<form action = "{{url_for('editTerm', term_id = glossary.id)}}" method = 'post'>
+<form action = "{{url_for('editTerm', term_id = term.id)}}" method = 'post'>
 
 <h4>Edit the name</h4>
     <input type = 'text' size = '50' name = 'name' 
-                placeholder = '{{glossary.name}}'>
+                placeholder = '{{term.name}}'>
 
 <h4>Edit definition:</h4>
-    <textarea type='text' rows='5' cols='50' name='definition' placeholder = '{{glossary.definition}}'></textarea>
+    <textarea type='text' rows='5' cols='50' name='definition' placeholder = '{{term.definition}}'></textarea>
 
 <p><input type = 'submit' value = 'Submit changes'></p>
 

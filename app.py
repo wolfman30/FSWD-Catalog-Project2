@@ -117,7 +117,21 @@ def newTerm():
     else:
         return render_template('newTerm.html')
 
-@app.route('/aging_hallmarks/glossary/edit', methods = ['GET', 'POST'])
+@app.route('/aging_hallmarks/glossary/<int:term_id>/delete', methods = ['GET', 'POST'])
+def deleteTerm(term_id):
+    term_to_del = session.query(
+            GlossaryofTerms).filter_by(id=term_id).one()
+    if request.method == 'POST':
+        session.delete(term_to_del)
+        session.commit()
+        return redirect(url_for('glossary', term_id = term_id))
+    else:
+        return render_template('deleteTerm.html', term = term_to_del, 
+                                                  glossary = glossary, 
+                                                  term_id = term_id)
+
+
+@app.route('/aging_hallmarks/glossary/<int:term_id>/edit', methods = ['GET', 'POST'])
 def editTerm(term_id):
     term_to_edit = session.query(
         GlossaryofTerms).filter_by(id=term_id).one()
@@ -128,9 +142,10 @@ def editTerm(term_id):
             term_to_edit.definition = request.form['definition']
         session.add(term_to_edit)
         session.commit()
-        return redirect(url_for('glossary'))
+        return redirect(url_for('glossary', term_id = term_id))
     else:
-        return render_template('editTerm.html', term = term_to_edit)
+        return render_template('editTerm.html', term = term_to_edit, 
+                                glossary = glossary, term_id = term_id)
 
 
 if __name__ == '__main__':
