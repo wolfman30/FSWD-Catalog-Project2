@@ -1,4 +1,4 @@
-Used this [guide](https://docs.google.com/document/d/e/2PACX-1vT7XPf0O3oLCACjKEaRVc_Z-nNoG6_ssRoo_Mai5Ce6qFK_v7PpR1lxmudIOqzKo2asKOc89WC-qpfG/pub?embedded=true) from Udacity to complete this with a Windows 10 o.s.:
+Used this [guide](https://docs.google.com/document/d/e/2PACX-1vT7XPf0O3oLCACjKEaRVc_Z-nNoG6_ssRoo_Mai5Ce6qFK_v7PpR1lxmudIOqzKo2asKOc89WC-qpfG/pub?embedded=true) from Udacity to complete this project with a Windows 10 o.s.:
 
 Step 1:
 
