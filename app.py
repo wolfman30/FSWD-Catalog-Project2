@@ -64,15 +64,31 @@ def deleteHallmark(hallmark_id):
     else:
         return render_template('deleteHallmark.html', hallmark = markerToDelete)
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/')
+@app.route('/aging_hallmarks/<int:hallmark_id>')
 @app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details')
-def hallmarkDetails(hallmark_id):
+def details(hallmark_id):
     hallmark = session.query(AgingHallmark).filter_by(id=hallmark_id).one()
     details = session.query(HallmarkDetails).filter_by(
                     hallmark_id = hallmark_id).all()
     return render_template('details.html', details=details, hallmark=hallmark)
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/edit',
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_detail/new', methods = ['GET', 'POST'])
+def newDetail(hallmark_id):
+    if request.method == 'POST':
+        newDetail = HallmarkDetails(name=request.form['name'],
+                                  description = request.form['description'], 
+                                  hallmark_id = hallmark_id)
+        session.add(newDetail)
+        session.commit()
+        return redirect(url_for('details', hallmark_id = hallmark_id))
+        flash("Created new detail!")
+    else:
+        return render_template('newDetail.html', hallmark_id = hallmark_id)
+
+    return render_template('newDetail.html', aging_hallmarks=aging_hallmark)
+
+
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_detail/<int:detail_id>/edit',
             methods = ['GET', 'POST'])
 def editDetail(hallmark_id, detail_id):
     editedDetail = session.query(HallmarkDetails).filter_by(id=detail_id).one()
@@ -81,17 +97,15 @@ def editDetail(hallmark_id, detail_id):
             editedDetail = request.form['name']
         if request.form['description']:
             editedDetail.description = request.form['description']
-        if request.form['treatment']:
-            editedDetail.treatment = request.form['treatment']
         if request.form['references']: 
             editedDetail.references = request.form['references']
         session.add(editedDetail)
         session.commit()
         flash("Edited detail!")
-        return redirect(url_for('hallmarkDetails', hallmark_id=hallmark_id))
+        return redirect(url_for('details', hallmark_id=hallmark_id))
     else:
         return render_template('editDetail.html', hallmark_id=hallmark_id, 
-                                detail_id=detail_id, detail=editedDetail)
+                                detail_id=detail_id, hallmark_detail=editedDetail)
 
 @app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/delete', 
             methods = ['GET', 'POST'])
@@ -131,7 +145,7 @@ def deleteTerm(term_id):
     if request.method == 'POST':
         session.delete(term_to_del)
         session.commit()
-        flash("Delete term!")
+        flash("Deleted term!")
         return redirect(url_for('glossary'))
     else:
         return render_template('deleteTerm.html', term = term_to_del, glossary = glossary, term_id = term_id)

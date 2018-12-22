@@ -19,7 +19,7 @@
 
 {% for hallmark in aging_hallmarks %}
 
-<b><a href="{{url_for('hallmarkDetails', hallmark_id = hallmark.id)}}"><p>{{hallmark.name}}</p></a></b>
+<b><a href="{{url_for('details', hallmark_id = hallmark.id)}}"><p>{{hallmark.name}}</p></a></b>
 
 <p>{{hallmark.summary}}</p>
 

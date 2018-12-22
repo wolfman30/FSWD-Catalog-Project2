@@ -2,20 +2,21 @@
 
 <h1>Create new Term in Glossary</h1>
 
-<form action = "{{url_for('newTerm')}}" method = 'post'>
+{% for hallmark in aging_hallmarks %}
+<form action = "{{url_for('newTerm', hallmark_id = hallmark.id)}}" method = 'post'>
 
 <dl>
 <dt>Name:</dt>
     <dd><input type = 'text' size = '50' name = 'name' required>
 
-<dt>Definition</dt>
+<dt>Definition: </dt>
     <dd><textarea name = 'definition' rows = '5' cols = '50'></textarea></dd>
 
 <input type = 'submit' value = 'Create like a god!'>
 </dl>
 
 </form>
-
+{%endfor%}
 <p><a href = "{{url_for('glossary')}}">Cancel</a></p>
 
 

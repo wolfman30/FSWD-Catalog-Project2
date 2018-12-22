@@ -1,4 +1,5 @@
 <html><body>
+
 <h1>{{hallmark.name}}</h1>
 
 {% with messages = get_flashed_messages()%}
@@ -12,37 +13,18 @@
     {% endif %}
 {% endwith %}
 
-<a href = "{{url_for('newDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Create New Detail</a></br>
+<a href = "{{url_for('newDetail', hallmark_id = hallmark.id)}}">Create New Detail</a></br>
 
-{% if hallmark_details != [] %}
-<h2>Description</h2>
 
-{% for detail in hallmark_details %}
-
-{% if detail.name == 'Endogenous threats'%}
+{% for detail in details %}
 <p>{{detail.name}}</p>
 <p>{{detail.description}}</p>
+<p>
+        <a href = #>Delete</a>
+        <a href = #>Edit</a>
+</p>
+{% endfor %}
 
-
-<a href = "{{url_for('editDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Edit</a></br>
-<a href = "{{url_for('deleteDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Delete</a>
-{%endif%}
-
-{% if detail.name == 'Exogenous threats' %}
-<p>{{detail.name}}</p>
-<p>{{detail.description}}</p>
-
-
-<a href = "{{url_for('editDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Edit</a></br>
-<a href = "{{url_for('deleteDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Delete</a>
-{%endif%}
-
-{%endfor%}
-
-{%else%}
-<p>You currently have no details</p>
-
-{%endif%}
 
 <p><a href = "{{url_for('agingHallmarks')}}"> Back to Home Page</a></p>
 
