@@ -4,6 +4,17 @@
 <h1>Glossary</h1>
 <h3><a href = "{{url_for('newTerm')}}">Create new term</a></h3>
 
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+
+<ul>
+    {% for message in messages %}
+        <li><strong>{{message}}</strong></li>
+    {% endfor %}
+</ul>
+    {% endif %}
+{% endwith %}
+
 {% for term in glossary %}
 <h3>{{term.name}}</h3>
     <p>

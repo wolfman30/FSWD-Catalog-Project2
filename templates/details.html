@@ -1,10 +1,23 @@
 <html><body>
 <h1>{{hallmark.name}}</h1>
 
-{% if details != [] %}
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+
+<ul>
+    {% for message in messages %}
+        <li><strong>{{message}}</strong></li>
+    {% endfor %}
+</ul>
+    {% endif %}
+{% endwith %}
+
+<a href = "{{url_for('newDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Create New Detail</a></br>
+
+{% if hallmark_details != [] %}
 <h2>Description</h2>
 
-{% for detail in details %}
+{% for detail in hallmark_details %}
 
 {% if detail.name == 'Endogenous threats'%}
 <p>{{detail.name}}</p>
