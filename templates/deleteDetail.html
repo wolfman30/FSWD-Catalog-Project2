@@ -1,13 +1,13 @@
 <html>
 <body>
-<form action = "{{url_for('deleteDetail', hallmark_id = hallmark_id, detail_id = detail.id)}}">
-<h1>Are you sure you want to delete '{{detail.name}}'? Are you? Ya shore?</h1>
+<form action = "{{url_for('deleteDetail', hallmark_id = hallmark_id, detail_id = hallmark_details.id)}}" method = 'post'>
+<h1>Are you sure you want to delete '{{hallmark_details.name}}'? Are you? Ya shore?</h1>
 
 <input type = 'submit' value = 'SFU! Delete!'>
 
 
 </form>
-<a href="{{url_for('hallmarkDetails', hallmark_id=hallmark_id)}}">Cancel</a>
+<a href="{{url_for('details', hallmark_id=hallmark_id)}}">Cancel</a>
 
 </body>
 </html>

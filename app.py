@@ -64,15 +64,17 @@ def deleteHallmark(hallmark_id):
     else:
         return render_template('deleteHallmark.html', hallmark = markerToDelete)
 
-@app.route('/aging_hallmarks/<int:hallmark_id>')
+
 @app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details')
 def details(hallmark_id):
     hallmark = session.query(AgingHallmark).filter_by(id=hallmark_id).one()
     details = session.query(HallmarkDetails).filter_by(
                     hallmark_id = hallmark_id).all()
-    return render_template('details.html', details=details, hallmark=hallmark)
+    return render_template('details.html', details=details, 
+                    hallmark=hallmark, 
+                    hallmark_id = hallmark_id)
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_detail/new', methods = ['GET', 'POST'])
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details/new', methods = ['GET', 'POST'])
 def newDetail(hallmark_id):
     if request.method == 'POST':
         newDetail = HallmarkDetails(name=request.form['name'],
@@ -85,29 +87,27 @@ def newDetail(hallmark_id):
     else:
         return render_template('newDetail.html', hallmark_id = hallmark_id)
 
-    return render_template('newDetail.html', aging_hallmarks=aging_hallmark)
+    return render_template('newDetail.html', aging_hallmarks = aging_hallmark)
 
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_detail/<int:detail_id>/edit',
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details/<int:detail_id>/edit',
             methods = ['GET', 'POST'])
 def editDetail(hallmark_id, detail_id):
     editedDetail = session.query(HallmarkDetails).filter_by(id=detail_id).one()
     if request.method == 'POST':
         if request.form['name']: 
-            editedDetail = request.form['name']
+            editedDetail.name = request.form['name']
         if request.form['description']:
             editedDetail.description = request.form['description']
-        if request.form['references']: 
-            editedDetail.references = request.form['references']
         session.add(editedDetail)
         session.commit()
         flash("Edited detail!")
         return redirect(url_for('details', hallmark_id=hallmark_id))
     else:
         return render_template('editDetail.html', hallmark_id=hallmark_id, 
-                                detail_id=detail_id, hallmark_detail=editedDetail)
+                                detail_id=detail_id, hallmark_details=editedDetail)
 
-@app.route('/aging_hallmarks/<int:hallmark_id>/detail/<int:detail_id>/delete', 
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details/<int:detail_id>/delete', 
             methods = ['GET', 'POST'])
 def deleteDetail(hallmark_id, detail_id):
     detail_to_del = session.query(HallmarkDetails).filter_by(id=detail_id).one()
@@ -115,10 +115,10 @@ def deleteDetail(hallmark_id, detail_id):
         session.delete(detail_to_del)
         session.commit()
         flash("Deleted detail!")
-        return redirect(url_for('hallmarkDetails', hallmark_id=hallmark_id))
+        return redirect(url_for('details', hallmark_id=hallmark_id))
     else:
         return render_template('deleteDetail.html', hallmark_id=hallmark_id, 
-                                detail_id=detail_id, detail=detail_to_del)
+                                detail_id=detail_id, hallmark_details=detail_to_del)
 
 @app.route('/aging_hallmarks/glossary')
 def glossary():

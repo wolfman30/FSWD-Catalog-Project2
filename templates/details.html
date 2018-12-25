@@ -17,12 +17,16 @@
 
 
 {% for detail in details %}
+
 <p>{{detail.name}}</p>
 <p>{{detail.description}}</p>
-<p>
-        <a href = #>Delete</a>
-        <a href = #>Edit</a>
-</p>
+    
+    <p>
+        <a href = "{{url_for('deleteDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Delete</a>
+        </br>
+        <a href = "{{url_for('editDetail', hallmark_id = hallmark.id, detail_id = detail.id)}}">Edit</a>
+    </p>
+
 {% endfor %}
 
 
