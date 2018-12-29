@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms
+from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms, References
 
 engine = create_engine('sqlite:///aginghallmarks.db', 
             connect_args = {'check_same_thread': False})
@@ -246,6 +246,14 @@ endogenous_threats = GlossaryofTerms(name = 'endogenous threats',
                                      definition = '''threats to the genome that arise inside the nuclei 
                                                      or mitochondria''')
 session.add(endogenous_threats)
+session.commit()
+
+reference1 = References(name = "[1] Hallmarks of Aging")
+session.add(reference1)
+session.commit()
+
+reference2 = References(name = "[2] The Impact of Extracellular Matrix Proteins on the Aging Process")
+session.add(reference2)
 session.commit()
 
 print("Added aging hallmarks!")

@@ -1,0 +1,12 @@
+<html><body>
+    <h1>Do you really want to delete {{reference.name}}?</h1>
+
+    <form action = "{{url_for('deleteReference', reference_id = reference.id)}}" method = 'post'>
+    
+    <input type = 'submit' value = 'Delete'>
+    
+    <p><a href = "{{url_for('references')}}">Cancel</a></p>
+    
+    </form>
+    
+</body></html>

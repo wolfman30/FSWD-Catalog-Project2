@@ -1,11 +1,19 @@
+<!DOCTYPE html>
 <html>
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
 <body>
 
-<h1> Aging Hallmarks </h1> 
+<h1 style = "border-top: 10px solid rgb(43, 4, 153); width:50%; padding-right: 15px; 
+text-align:center;"> Aging Hallmarks </h1> 
 
-<h2><a href="{{url_for('glossary')}}">Glossary</a></h2>
+    <h2 style = "color:rgb(43, 4, 153); text-align:center; border-right: 12px solid red; 
+    border-top: 5px double red; width: 25%; padding-right: 15px;"> 
+    <a href="{{url_for('newHallmark')}}">Create New Hallmark</a> 
+    </h2>
 
-<h2><a href="{{url_for('newHallmark')}}">Create New Hallmark</a></h2>
+
     {% with messages = get_flashed_messages()%}
 {% if messages %}
 
@@ -19,6 +27,9 @@
 
 {% for hallmark in aging_hallmarks %}
 
+<div style="color:rgb(43, 4, 153); border-left: 12px solid rgb(196, 4, 4); 
+    border-top: 2px dashed rgb(196, 4, 4)); padding: 15px;">
+
 <b><a href="{{url_for('details', hallmark_id = hallmark.id)}}"><p>{{hallmark.name}}</p></a></b>
 
 <p>{{hallmark.summary}}</p>
@@ -27,7 +38,16 @@
 </br>
 <a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
 
+</div>
+
 {% endfor %}
+
+<h3 style="color:rgb(43, 4, 153); border-left: 12px solid red; padding-left: 15px;">
+
+        <a href="{{url_for('glossary')}}">Glossary</a>
+</h3>
+
+<h3 style = "border-right: 12px solid rgb(172, 10, 10); padding-right: 15px; text-align:right;"><a href = "{{url_for('references')}}">References</a></h3>
 
 </body>
 </html>

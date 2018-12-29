@@ -2,8 +2,8 @@
 
 <h1>Create new Term in Glossary</h1>
 
-{% for hallmark in aging_hallmarks %}
-<form action = "{{url_for('newTerm', hallmark_id = hallmark.id)}}" method = 'post'>
+
+<form action = "{{url_for('newTerm')}}" method = 'post'>
 
 <dl>
 <dt>Name:</dt>
@@ -16,7 +16,7 @@
 </dl>
 
 </form>
-{%endfor%}
+
 <p><a href = "{{url_for('glossary')}}">Cancel</a></p>
 
 

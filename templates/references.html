@@ -1,0 +1,31 @@
+<html>
+<body>
+
+    <h3><a href = "{{url_for('newReference')}}">Create New Reference?</a></h3>
+    {% for reference in references %}
+ 
+    {% if reference.name == "[1] Hallmarks of Aging" %}
+    <p>
+        <a href = "https://www.cell.com/action/showPdf?pii=S0092-8674%2813%2900645-4">{{reference.name}}</a>
+    </p>
+
+    {% elif reference.name == "[2] The Impact of Extracellular Matrix Proteins on the Aging Process" %}
+    <p><a href = "https://blog.singularitynet.io/the-impact-of-extracellular-matrix-proteins-cross-linking-on-the-aging-process-b7553d375744">{{reference.name}}</a></p>
+    
+
+    {% elif reference.name == "[3] What are the currently available methods to impede the accumulation of modified long-lived extracellular matrix proteins?"%}
+    <p>
+    <a href = "https://medium.com/@denis.odinokov/what-are-the-currently-available-methods-to-impede-the-accumulation-of-modified-long-lived-960aaa10bc2"> 
+        [3] What are the currently available methods to impede the accumulation of modified long-lived extracellular matrix proteins?
+    </a>
+</p>
+    {% endif %}
+
+    <a href = "{{url_for('editReference', reference_id = reference.id)}}">Edit</a>
+</br>
+    <a href = "{{url_for('deleteReference', reference_id = reference.id)}}">Delete</a>
+    {%endfor%}
+    
+
+</body>
+</html>

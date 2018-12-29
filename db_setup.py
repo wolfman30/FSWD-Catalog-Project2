@@ -14,6 +14,14 @@ class AgingHallmark(Base):
     summary = Column(String(300))
     treatment = Column(String(300))
 
+    @property 
+    def serialize(self):
+        #returns the data as a dictionary which is easier to serialize and analyze 
+        return {"id": self.id, 
+                "name": self.name, 
+                "summary": self.summary, 
+                "treatment": self.treatment}
+
 class HallmarkDetails(Base):
     
     __tablename__ = 'hallmark_details'
@@ -25,6 +33,15 @@ class HallmarkDetails(Base):
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
     aging_hallmark = relationship(AgingHallmark)
 
+    @property 
+    def serialize(self):
+        #returns the data as a dictionary which is easier to serialize and analyze 
+        return {"id": self.id, 
+                "name": self.name, 
+                "description": self.description, 
+                "references": self.references 
+               }
+
 class GlossaryofTerms(Base):
 
     __tablename__ = 'glossary'
@@ -32,6 +49,24 @@ class GlossaryofTerms(Base):
     id = Column(Integer, primary_key = True)
     name = Column(String(100), nullable = False)
     definition = Column(String(500))
+
+    @property 
+    def serialize(self):
+        return {"id": self.id, 
+                "name":self.name, 
+                "definition": self.definition}
+
+class References(Base):
+
+    __tablename__ = "references"
+    
+    id = Column(Integer, primary_key = True)
+    name = Column(String(100), nullable = False)
+
+    @property 
+    def serialize(self): 
+        return {"id": self.id, 
+                "name": self.name}
 
 engine = create_engine('sqlite:///aginghallmarks.db', 
             connect_args = {'check_same_thread': False})

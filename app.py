@@ -1,8 +1,8 @@
 from flask import Flask, render_template, redirect, request 
-from flask import url_for, flash
+from flask import url_for, flash, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms
+from db_setup import Base, AgingHallmark, HallmarkDetails, GlossaryofTerms, References
 
 app =  Flask(__name__)
 
@@ -14,6 +14,12 @@ engine = create_engine('sqlite:///aginghallmarks.db',
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
+
+
+@app.route('/aging_hallmarks/JSON')
+def aging_hallmarksJSON():
+    aging_hallmarks = session.query(AgingHallmark).all()
+    return jsonify(aging_hallmarks = [a.serialize for a in aging_hallmarks])
 
 @app.route('/')
 @app.route('/aging_hallmarks')
@@ -64,6 +70,12 @@ def deleteHallmark(hallmark_id):
     else:
         return render_template('deleteHallmark.html', hallmark = markerToDelete)
 
+@app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details/JSON')
+def detailsJSON(hallmark_id):
+    hallmark = session.query(AgingHallmark).filter_by(id=hallmark_id).one()
+    details = session.query(HallmarkDetails).filter_by(
+                    hallmark_id = hallmark_id).all()
+    return jsonify(Details = [d.serialize for d in details])
 
 @app.route('/aging_hallmarks/<int:hallmark_id>/hallmark_details')
 def details(hallmark_id):
@@ -120,6 +132,11 @@ def deleteDetail(hallmark_id, detail_id):
         return render_template('deleteDetail.html', hallmark_id=hallmark_id, 
                                 detail_id=detail_id, hallmark_details=detail_to_del)
 
+@app.route('/aging_hallmarks/glossary/JSON')
+def glossaryJSON():
+    glossary = session.query(GlossaryofTerms).all()
+    return jsonify(Glossary = [g.serialize for g in glossary])
+    
 @app.route('/aging_hallmarks/glossary')
 def glossary():
     glossary = session.query(GlossaryofTerms).all()
@@ -168,6 +185,56 @@ def editTerm(term_id):
         return render_template('editTerm.html', term = term_to_edit, 
                                 glossary = glossary, term_id = term_id)
 
+
+@app.route('/aging_hallmarks/references/JSON')
+def referencesJSON():
+    references = session.query(References).all()
+    return jsonify(References = [r.serialize for r in references])
+
+@app.route('/aging_hallmarks/references')
+def references():
+    references = session.query(References).all()
+    return render_template('references.html', references = references)
+
+@app.route('/aging_hallmarks/references/<int:reference_id>/delete', methods = ['GET', 'POST'])
+def deleteReference(reference_id):
+    ref_to_del = session.query(
+            References).filter_by(id=reference_id).one()
+    if request.method == 'POST':
+        session.delete(ref_to_del)
+        session.commit()
+        flash("Deleted reference!")
+        return redirect(url_for('references'))
+    else:
+        return render_template('deleteReference.html', reference = ref_to_del, 
+                                                  references = references, 
+                                                  reference_id = reference_id)
+
+@app.route('/aging_hallmarks/references/<int:reference_id>/edit', methods = ['GET', 'POST'])
+def editReference(reference_id):
+    ref_to_edit = session.query(
+        References).filter_by(id=reference_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            ref_to_edit.name = request.form['name']
+        session.add(ref_to_edit)
+        session.commit()
+        flash("Edited references!")
+        return redirect(url_for('references', reference_id = reference_id))
+    else:
+        return render_template('editReference.html', reference = ref_to_edit, 
+                                references = references, reference_id = reference_id)
+
+@app.route('/aging_hallmarks/references/newReference', methods = ['GET', 'POST'])
+def newReference():
+    if request.method == 'POST':
+        newReference = References(name=request.form['name'])
+        session.add(newReference)
+        session.commit()
+        return redirect(url_for('references'))
+        flash("Created new reference!")
+    else:
+        return render_template('newReference.html')
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'

@@ -1,0 +1,18 @@
+<html><body>
+        <h1>Create new Reference</h1>
+
+
+        <form action = "{{url_for('newReference')}}" method = 'post'>
+        
+        <dl>
+        <dt>Name:</dt>
+            <dd><input type = 'text' size = '50' name = 'name' required></dd>
+        
+        <input type = 'submit' value = 'Create like a god!'>
+        </dl>
+        
+        </form>
+
+        <p><a href = "{{url_for('references')}}">Cancel</a></p>
+        
+</body></html>

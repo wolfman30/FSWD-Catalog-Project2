@@ -1,0 +1,16 @@
+<html><body>
+    <h1>Edit Reference</h1>
+
+    <form action = "{{url_for('editReference', reference_id = reference.id)}}" method = 'post'>
+    
+    <h4>Edit name</h4>
+        <input type = 'text' size = '50' name = 'name' 
+                    placeholder = '{{reference.name}}'>
+    
+    <p><input type = 'submit' value = 'Submit changes'></p>
+    
+    </form>
+    
+    <a href = "{{url_for('references')}}"> Cancel </a>
+    
+</body></html>
