@@ -26,28 +26,28 @@ text-align:center;"> Aging Hallmarks </h1>
 {% endwith %}
 
 {% for hallmark in aging_hallmarks %}
+ <nav style = "text-align:center; width: 61.8%; border-top: 10px solid rgb(196, 4, 4);">
+        <ul><b><a href="{{url_for('details', hallmark_id = hallmark.id)}}"><li>{{hallmark.name}}</li></a></b></ul>
+</nav>
 
-<div style="color:rgb(43, 4, 153); border-left: 12px solid rgb(196, 4, 4); 
-    border-top: 2px dashed rgb(196, 4, 4)); padding: 15px;">
 
-<b><a href="{{url_for('details', hallmark_id = hallmark.id)}}"><p>{{hallmark.name}}</p></a></b>
-
+<article>
 <p>{{hallmark.summary}}</p>
 
 <a href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
 </br>
 <a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
-
-</div>
-
+</article>
+</section>
 {% endfor %}
 
-<h3 style="color:rgb(43, 4, 153); border-left: 12px solid red; padding-left: 15px;">
+<footer>
+<h3 style="color:rgb(43, 4, 153); border-right: 12px solid red; padding-right: 15px; text-align:right;">
 
         <a href="{{url_for('glossary')}}">Glossary</a>
 </h3>
 
 <h3 style = "border-right: 12px solid rgb(172, 10, 10); padding-right: 15px; text-align:right;"><a href = "{{url_for('references')}}">References</a></h3>
-
+</footer>
 </body>
 </html>
