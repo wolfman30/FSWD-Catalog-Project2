@@ -14,6 +14,14 @@ class User(Base):
     email = Column(String(100))
     picture = Column(String(500))
 
+    @property 
+    def serialize(self):
+        #returns the data as a dictionary which is easier to serialize and analyze 
+        return {"id": self.id, 
+                "name": self.name, 
+                "email": self.email, 
+                "picture": self.picture}
+
 class AgingHallmark(Base):
     
     __tablename__ = 'aging_hallmark'
