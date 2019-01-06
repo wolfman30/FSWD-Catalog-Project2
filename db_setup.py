@@ -5,6 +5,15 @@ from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
+class User(Base):
+
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key = True)
+    name = Column(String(60), nullable = False)
+    email = Column(String(100))
+    picture = Column(String(500))
+
 class AgingHallmark(Base):
     
     __tablename__ = 'aging_hallmark'
@@ -13,6 +22,8 @@ class AgingHallmark(Base):
     name = Column(String(300), nullable=False)
     summary = Column(String(300))
     treatment = Column(String(300))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property 
     def serialize(self):
@@ -31,7 +42,9 @@ class HallmarkDetails(Base):
     description = Column(String(500))
     references = Column(String(250))
     hallmark_id = Column(Integer, ForeignKey('aging_hallmark.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     aging_hallmark = relationship(AgingHallmark)
+    user = relationship(User)
 
     @property 
     def serialize(self):

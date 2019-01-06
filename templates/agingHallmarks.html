@@ -3,16 +3,16 @@
 <head>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<header>
+<h1 style = "float: right; width: 61.8%; border-top: 10px solid rgb(43, 4, 153); width:61.8%; padding-right: 15px; 
+text-align: right;"> Aging Hallmarks </h1>
 
-<h1 style = "border-top: 10px solid rgb(43, 4, 153); width:50%; padding-right: 15px; 
-text-align:center;"> Aging Hallmarks </h1> 
 
-    <h2 style = "color:rgb(43, 4, 153); text-align:center; border-right: 12px solid red; 
-    border-top: 5px double red; width: 25%; padding-right: 15px;"> 
+    <h2 style = "color:rgb(43, 4, 153); text-align:right; border-right: 12px solid red; 
+    border-top: 5px double red; width: 30.92%; padding-right: 15px;"> 
     <a href="{{url_for('newHallmark')}}">Create New Hallmark</a> 
     </h2>
-
+</header>
 
     {% with messages = get_flashed_messages()%}
 {% if messages %}
@@ -24,24 +24,24 @@ text-align:center;"> Aging Hallmarks </h1>
 </ul>
     {% endif %}
 {% endwith %}
-
+<section>
 {% for hallmark in aging_hallmarks %}
- <nav style = "text-align:center; width: 61.8%; border-top: 10px solid rgb(196, 4, 4);">
+ <nav style = "float:left; width: 38.2%; text-align:center; width: 38.2%; border-top: 10px solid rgb(196, 4, 4);">
         <ul><b><a href="{{url_for('details', hallmark_id = hallmark.id)}}"><li>{{hallmark.name}}</li></a></b></ul>
 </nav>
 
 
-<article>
+<article style = "background-color:rgb(0, 0, 255, 0.233); float:left; width: 61.8%; text-align:center; border-top:10px solid rgb(196, 4, 4);">
 <p>{{hallmark.summary}}</p>
 
-<a href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
+<a style = "text-align:right;" href="{{url_for('editHallmark', hallmark_id = hallmark.id)}}">Edit</a>
 </br>
 <a href="{{url_for('deleteHallmark', hallmark_id = hallmark.id)}}">Delete</a>
 </article>
 </section>
 {% endfor %}
 
-<footer>
+<footer style = "float:right;">
 <h3 style="color:rgb(43, 4, 153); border-right: 12px solid red; padding-right: 15px; text-align:right;">
 
         <a href="{{url_for('glossary')}}">Glossary</a>
